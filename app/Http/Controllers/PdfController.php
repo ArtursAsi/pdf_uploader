@@ -9,7 +9,7 @@ class PdfController extends Controller
 {
     public function index()
     {
-        $pdfs = Pdf::latest()->paginate(20);
+        $pdfs = Pdf::first()->paginate(20);
         return view('index', compact('pdfs'));
     }
 
