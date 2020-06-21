@@ -15,10 +15,11 @@
     <div class="container">
 
         <div class="row">
-            @foreach($pdfs as $pdf)
+            @forelse($pdfs as $pdf)
                 <div class="col-3">
-                    <a href="" data-toggle="modal" data-target="#pdfModal-{{$pdf->id}}"><img src="{{'storage/images/'.$pdf->pdf_image}}" alt=""
-                                                                               style="width: 100%"></a>
+                    <a href="" data-toggle="modal" data-target="#pdfModal-{{$pdf->id}}"><img
+                            src="{{'storage/images/'.$pdf->pdf_image}}" alt=""
+                            style="width: 100%"></a>
                     <div class="modal" tabindex="-1" role="dialog" id="pdfModal-{{$pdf->id}}">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -29,18 +30,27 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="{{'storage/images/'.$pdf->pdf_image}}" alt=""
-                                         style="width: 100%">
+                                    <a href="{{'storage/images/'.$pdf->pdf_image}}"><img src="{{'storage/images/'.$pdf->pdf_image}}" alt=""
+                                                    style="width: 100%"></a>
                                 </div>
                                 <div class="modal-footer">
-
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <form  action="{{route('delete',$pdf->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger">
+                                            Remove
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                There are no PDF files uploaded!
+            @endforelse
         </div>
 
         <div class="row justify-content-center">

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PdfController@index')->name('index');
 Route::post('/', 'PdfController@store')->name('store');
+Route::delete('/{pdf}', 'PdfController@destroy')->name('delete');
 
 
 
